@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<section class="contact py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="section-title">Contact Us</h2>
+                        <p>We're here to answer your questions and discuss your needs.</p>
+
+                        <!-- Flash messages section -->
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+
+                        <form action="{{ url_for('contact') }}" method="POST" class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required placeholder="Enter your name">
+                                <div class="invalid-feedback">Please enter your name.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email">
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone_number" class="form-control" required placeholder="Enter your phone number">
+                                <div class="invalid-feedback">Please enter your phone number.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-control" required placeholder="Enter your subject" value="{{ 'Registration for ' + event if event else '' }}">
+                                <div class="invalid-feedback">Please enter a subject.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="6" class="form-control" required placeholder="{% if event %}I'm interested in registering for the {{ event }} event. Please provide me with more information.{% endif %}"></textarea>
+                                <div class="invalid-feedback">Please enter your message.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="section-title">Contact Details</h2>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt fa-2x"></i>
+                            <div>
+                                <h3>Address</h3>
+                                <p>Plot 16, Lateef Jakande Road,<br>Agidingbi B/Stop, Ikeja, Lagos, Nigeria</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone fa-2x"></i>
+                            <div>
+                                <h3>Phone</h3>
+                                <p>+234-813-400-2737<br>0806-829-6897</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope fa-2x"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <p><a href="mailto:admin@colossustek.com">admin@colossustek.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extracss %}
+<style>
+    .contact {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    .section-title {
+        color: #007bff;
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .contact-item i {
+        margin-right: 20px;
+        color: #007bff;
+    }
+</style>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.getElementById('contactForm');
+        const formInputs = contactForm.querySelectorAll('input, textarea');
+
+        formInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateInput(this);
+            });
+        });
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (validateForm()) {
+                // Add your form submission logic here, e.g., AJAX request
+                alert('Form submitted successfully!');
+                this.reset();
+                formInputs.forEach(input => {
+                    input.classList.remove('is-valid');
+                    input.classList.remove('is-invalid');
+                });
+            }
+        });
+
+        function validateInput(input) {
+            if (input.checkValidity()) {
+                input.classList.add('is-valid');
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+                input.classList.remove('is-valid');
+            }
+        }
+
+        function validateForm() {
+            let isValid = true;
+            formInputs.forEach(input => {
+                validateInput(input);
+                if (!input.checkValidity()) {
+                    isValid = false;
+                }
+            });
+            return isValid;
+        }
+    });
+</script>
+{% endblock %}

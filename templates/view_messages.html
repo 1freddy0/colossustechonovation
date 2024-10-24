@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}View Messages - Colossus Technovation Ltd{% endblock %}
+
+{% block content %}
+<section id="view-messages" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">View Contact Messages</h2>
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="card mb-3 shadow-sm">
+                            <div class="card-header bg-light">
+                                <h5 class="card-title mb-0">{{ message.name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <i class="fas fa-envelope"></i> {{ message.email }}
+                                </h6>
+                                <p class="card-text">
+                                    <strong><i class="fas fa-phone"></i> Phone:</strong> {{ message.phone_number or 'N/A' }}
+                                </p>
+                                <p class="card-text">{{ message.message }}</p>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <small><i class="fas fa-clock"></i> Sent on {{ message.date_sent.strftime('%B %d, %Y at %I:%M %p') }}</small>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-info" role="alert">
+                        No messages found.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        margin-bottom: 20px;
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 0;
+    }
+
+    .card-subtitle {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+
+    .card-text {
+        margin-bottom: 10px;
+    }
+
+    .card-footer {
+        background-color: #f8f9fa;
+    }
+
+    .alert {
+        margin-top: 20px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .py-5 {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+    }
+
+    .text-center {
+        text-align: center !important;
+    }
+
+    .mb-4 {
+        margin-bottom: 1.5rem !important;
+    }
+</style>
+{% endblock %}

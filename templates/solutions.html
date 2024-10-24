@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}Solutions - Colossus Technovation Ltd{% endblock %}
+
+{% block extra_css %}
+<style>
+    .background-header {
+        background-image: url('/static/images/solutions-background.jpg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        padding: 4rem 0;
+        margin-bottom: 2rem;
+    }
+
+    .background-header h1 {
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .solutions-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .solution-category {
+        margin-bottom: 3rem;
+    }
+
+    .solution-category h2 {
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--secondary-color);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .solution-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .solution-item {
+        background-color: var(--bg-color);
+        border: 1px solid var(--primary-color);
+        border-radius: 8px;
+        padding: 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .solution-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .solution-item h3 {
+        color: var(--tertiary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .solution-item p {
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="background-header">
+    <h1>Our Solutions</h1>
+</div>
+
+<div class="solutions-container">
+    <div class="solution-category">
+        <h2>IT Solutions</h2>
+        <div class="solution-list">
+            <div class="solutions-container">
+                <h1>Our Solutions</h1>
+                
+                <div class="solution-category">
+                    <h2>IT Solutions</h2>
+                    <div class="solution-list">
+                        <div class="solution-item">
+                            <h3>Cybersecurity Solutions</h3>
+                            <p>Comprehensive security measures to protect your digital assets and data.</p>
+                        </div>
+                        <div class="solution-item">
+                            <h3>IT Infrastructure</h3>
+                            <p>Robust and scalable IT infrastructure solutions for businesses of all sizes.</p>
+                        </div>
+                        <div class="solution-item">
+                            <h3>Custom Software & Web Development</h3>
+                            <p>Tailored software solutions to meet your unique business needs.</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="solution-category">
+                    <h2>Mobile & Web Development</h2>
+                    <div class="solution-list">
+                        <div class="solution-item">
+                            <h3>Android & iOS Applications</h3>
+                            <p>Cutting-edge mobile applications for both Android and iOS platforms.</p>
+                        </div>
+                        <div class="solution-item">
+                            <h3>Web Development</h3>
+                            <p>Responsive and user-friendly websites to enhance your online presence.</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="solution-category">
+                    <h2>Business Solutions</h2>
+                    <div class="solution-list">
+                        <div class="solution-item">
+                            <h3>Digital Marketing</h3>
+                            <p>Comprehensive digital marketing strategies to boost your online visibility.</p>
+                        </div>
+                        <div class="solution-item">
+                            <h3>Business Automation</h3>
+                            <p>Streamline your operations with our advanced automation solutions.</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="solution-category">
+                    <h2>Renewable Energy</h2>
+                    <div class="solution-list">
+                        <div class="solution-item">
+                            <h3>Solar Energy Systems</h3>
+                            <p>Sustainable solar energy solutions for residential and commercial use.</p>
+                        </div>
+                        <div class="solution-item">
+                            <h3>Wind Energy Systems</h3>
+                            <p>Efficient wind energy systems to harness clean, renewable power.</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="solution-category">
+                    <h2>Training & Consultancy Services</h2>
+                    <div class="solution-list">
+                        <div class="solution-item">
+                            <h3>Web Development</h3>
+                            <p>Frontend & Backend Development training and certification.</p>
+                        </div>
+                        <div class="solution-item">
+                            <h3>Data & AI</h3>
+                            <p>Data Science, Machine Learning & AI courses and consultation.</p>
+                        </div>
+                        <div class="solution-item">
+                            <h3>Cybersecurity</h3>
+                            <p>Comprehensive cybersecurity training and certification programs.</p>
+                        </div>
+                        <div class="solution-item">
+                            <h3>Cloud Computing</h3>
+                            <p>Expert training in cloud technologies and best practices.</p>
+                        </div>
+                        <div class="solution-item">
+                            <h3>Renewable Energy</h3>
+                            <p>Solar Engineering training and consultancy services.</p>
+                        </div>
+                        <div class="solution-item">
+                            <h3>Digital Skills</h3>
+                            <p>Training in UI/UX Design, Social Media Management, and Content Creation.</p>
+                        </div>
+                        <div class="solution-item">
+                            <h3>Digital Marketing</h3>
+                            <p>Courses in Affiliate Marketing and Digital Entrepreneurship.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

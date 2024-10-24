@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+<section class="blog py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Recent Blog Posts</h2>
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-lg-6 mb-4">
+                <div class="card post h-100 border-0 shadow">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ post.title }}</h3>
+                        <p class="card-text"><em>By {{ post.author }} on {{ post.date_posted.strftime('%B %d, %Y') }}</em></p>
+                        <p class="card-text">{{ post.content[:150]|safe }}{% if post.content|length > 150 %}...{% endif %}</p>
+                        <a href="#" class="btn btn-primary stretched-link" role="button" data-toggle="modal" data-target="#readMoreModal{{ post.id }}">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Read More Modal -->
+            <div class="modal fade" id="readMoreModal{{ post.id }}" tabindex="-1" role="dialog" aria-labelledby="readMoreModalLabel{{ post.id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="readMoreModalLabel{{ post.id }}">{{ post.title }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p><em>By {{ post.author }} on {{ post.date_posted.strftime('%B %d, %Y') }}</em></p>
+                            <p>{{ post.content|safe }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if not posts %}
+        <div class="row">
+            <div class="col">
+                <p class="text-center">No blog posts available.</p>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row mt-5">
+            <div class="col text-center">
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addPostModal">
+                    <i class="fas fa-plus-circle mr-2"></i>Add New Post
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Post Modal -->
+    <div class="modal fade" id="addPostModal" tabindex="-1" role="dialog" aria-labelledby="addPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="addPostModalLabel">Add New Post</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ url_for('blog') }}" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title" class="font-weight-bold">Title</label>
+                            <input type="text" class="form-control form-control-lg" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="author" class="font-weight-bold">Author</label>
+                            <input type="text" class="form-control form-control-lg" id="author" name="author" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="content" class="font-weight-bold">Content</label>
+                            <textarea class="form-control form-control-lg" id="content" name="content" rows="8" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extracss %}
+<style>
+    .post {
+        border-radius: 8px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    .post:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+    .post .card-body {
+        padding: 20px;
+    }
+    .post .card-title {
+        color: #343a40;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+    .post .card-text {
+        color: #6c757d;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+    .modal-body p {
+        margin-bottom: 10px;
+    }
+    .btn.stretched-link {
+        position: relative;
+        width: 100%;
+    }
+    .modal-content {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .modal-header {
+        background-color: #007bff;
+        color: white;
+    }
+    .modal-body {
+        padding: 20px;
+    }
+    .form-control-lg {
+        font-size: 16px;
+    }
+    .btn-primary, .btn-secondary {
+        transition: all 0.3s ease;
+    }
+    .btn-primary:hover, .btn-secondary:hover {
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    // No additional JavaScript needed for this page
+</script>
+{% endblock %}
